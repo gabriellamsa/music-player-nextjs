@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
+import { PlayerProvider } from "@/context/PlayerContext";
+import PlayerContainer from "@/components/music/PlayerContainer";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -21,8 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${font.className} antialiased`}>
-        <Header />
-        {children}
+        <PlayerProvider>
+          <Header />
+          {children}
+          <PlayerContainer />
+        </PlayerProvider>
       </body>
     </html>
   );

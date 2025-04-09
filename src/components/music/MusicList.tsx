@@ -11,7 +11,7 @@ export default function MusicList() {
   useEffect(() => {
     async function fetchTracks() {
       try {
-        const results = await searchTracks("eminem"); // inicial search
+        const results = await searchTracks("benson boone"); // inicial search
         setTracks(results);
       } catch (error) {
         console.error("Error fetching tracks:", error);
