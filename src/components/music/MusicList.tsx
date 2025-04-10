@@ -11,7 +11,7 @@ export default function MusicList() {
   useEffect(() => {
     async function fetchTracks() {
       try {
-        const results = await searchTracks("benson boone"); // inicial search
+        const results = await searchTracks("benson boone");
         setTracks(results);
       } catch (error) {
         console.error("Error fetching tracks:", error);
@@ -22,12 +22,13 @@ export default function MusicList() {
 
     fetchTracks();
   }, []);
+
   if (loading) return <div className="p-4">Loading tracks...</div>;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
       {tracks.map((track) => (
-        <MusicItem key={track.id} track={track} />
+        <MusicItem key={track.id} track={track} allTracks={tracks} />
       ))}
     </div>
   );

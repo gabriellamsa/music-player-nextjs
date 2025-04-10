@@ -1,32 +1,53 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState } from "react";
 
-const PlayerContext = createContext<any>(null);
+interface PlayerContextType {
+  currentTrack: any;
+  playlist: any[];
+  playTrack: (track: any, playlist?: any[]) => void;
+  playNext: () => void;
+  playPrevious: () => void;
+}
 
-export function PlayerProvider({ children }: { children: ReactNode }) {
-  const [currentTrack, setCurrentTrack] = useState<any>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+const PlayerContext = createContext<PlayerContextType>({
+  currentTrack: null,
+  playlist: [],
+  playTrack: () => {},
+  playNext: () => {},
+  playPrevious: () => {},
+});
 
-  const playTrack = (track: any) => {
+export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
+  const [currentTrack, setCurrentTrack] = useState<any | null>(null);
+  const [playlist, setPlaylist] = useState<any[]>([]);
+
+  const playTrack = (track: any, list?: any[]) => {
     setCurrentTrack(track);
-    setIsPlaying(true);
+    if (list) setPlaylist(list);
+  };
+
+  const playNext = () => {
+    if (!currentTrack || playlist.length === 0) return;
+    const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id);
+    const nextTrack = playlist[currentIndex + 1];
+    if (nextTrack) setCurrentTrack(nextTrack);
+  };
+
+  const playPrevious = () => {
+    if (!currentTrack || playlist.length === 0) return;
+    const currentIndex = playlist.findIndex((t) => t.id === currentTrack.id);
+    const previousTrack = playlist[currentIndex - 1];
+    if (previousTrack) setCurrentTrack(previousTrack);
   };
 
   return (
     <PlayerContext.Provider
-      value={{
-        currentTrack,
-        isPlaying,
-        setIsPlaying,
-        playTrack,
-      }}
+      value={{ currentTrack, playlist, playTrack, playNext, playPrevious }}
     >
       {children}
     </PlayerContext.Provider>
   );
-}
+};
 
-export function usePlayer() {
-  return useContext(PlayerContext);
-}
+export const usePlayer = () => useContext(PlayerContext);
