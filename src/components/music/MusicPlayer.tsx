@@ -82,7 +82,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 p-2 shadow-xl z-50">
+    <div className="fixed bottom-0 w-full bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 p-2 shadow-xl z-30">
       <audio
         ref={audioRef}
         src={track.preview}

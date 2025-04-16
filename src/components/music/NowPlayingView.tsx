@@ -10,7 +10,7 @@ export default function NowPlayingView() {
 
   return (
     <>
-      <div className="fixed right-0 top-0 h-full w-full md:w-1/3 bg-neutral-100 dark:bg-neutral-800 border-l border-neutral-200 dark:border-neutral-700 p-6 overflow-y-auto">
+      <div className="fixed right-0 top-16 h-[calc(100vh-8rem)] w-full md:w-1/3 bg-neutral-100 dark:bg-neutral-800 border-l border-neutral-200 dark:border-neutral-700 p-6 overflow-y-auto">
         <div className="flex flex-col items-center gap-6">
           <img
             src={currentTrack.album.cover_big}
