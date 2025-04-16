@@ -13,14 +13,14 @@ export default function ResponsiveNav() {
 
   return (
     <div className="flex items-center justify-between">
-      <Link href="/" className="text-2xl font-bold text-gray-800">
+      <Link href="/" className="text-2xl font-bold text-gray-900">
         MusicApp
       </Link>
 
-      <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+      <div className="hidden md:flex gap-6 text-sm font-medium">
         <Link
           href="/"
-          className={`hover:text-gray-900 transition-colors ${
+          className={`text-gray-700 hover:text-gray-900 transition-colors ${
             isActive("/") ? "text-gray-900 font-semibold" : ""
           }`}
         >
@@ -28,7 +28,7 @@ export default function ResponsiveNav() {
         </Link>
         <Link
           href="/browse"
-          className={`hover:text-gray-900 transition-colors ${
+          className={`text-gray-700 hover:text-gray-900 transition-colors ${
             isActive("/browse") ? "text-gray-900 font-semibold" : ""
           }`}
         >
@@ -36,7 +36,7 @@ export default function ResponsiveNav() {
         </Link>
         <Link
           href="/library"
-          className={`hover:text-gray-900 transition-colors ${
+          className={`text-gray-700 hover:text-gray-900 transition-colors ${
             isActive("/library") ? "text-gray-900 font-semibold" : ""
           }`}
         >
