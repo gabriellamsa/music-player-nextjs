@@ -82,7 +82,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 p-4 shadow-xl z-50">
+    <div className="fixed bottom-0 w-full bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 p-2 shadow-xl z-50">
       <audio
         ref={audioRef}
         src={track.preview}
@@ -90,12 +90,12 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
         onLoadedMetadata={handleLoaded}
       />
 
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 max-w-5xl mx-auto w-full">
-        <div className="flex items-center gap-4 w-full md:w-auto">
+      <div className="flex items-center justify-between gap-4 max-w-5xl mx-auto w-full">
+        <div className="flex items-center gap-3">
           <img
             src={track.album.cover_small}
             alt={track.title}
-            className="w-12 h-12 rounded-md object-cover"
+            className="w-10 h-10 rounded-md object-cover"
           />
           <div className="truncate">
             <p className="font-semibold text-sm truncate">{track.title}</p>
@@ -105,49 +105,47 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
           </div>
         </div>
 
-        <div className="flex flex-col items-center w-full md:flex-1 md:max-w-md">
-          <div className="flex items-center justify-center gap-6">
-            <button onClick={playPrevious}>
-              <SkipBack size={20} />
-            </button>
+        <div className="flex items-center gap-4">
+          <button onClick={playPrevious} className="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full">
+            <SkipBack size={18} />
+          </button>
 
-            <motion.button
-              onClick={togglePlay}
-              whileTap={{ scale: 0.9 }}
-              animate={
-                isPlaying
-                  ? {
-                      scale: [1, 1.1, 1],
-                      transition: { duration: 1, repeat: Infinity },
-                    }
-                  : {}
-              }
-              className="p-2 rounded-full"
-            >
-              {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-            </motion.button>
+          <motion.button
+            onClick={togglePlay}
+            whileTap={{ scale: 0.9 }}
+            animate={
+              isPlaying
+                ? {
+                    scale: [1, 1.1, 1],
+                    transition: { duration: 1, repeat: Infinity },
+                  }
+                : {}
+            }
+            className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800"
+          >
+            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+          </motion.button>
 
-            <button onClick={playNext}>
-              <SkipForward size={20} />
-            </button>
-          </div>
+          <button onClick={playNext} className="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full">
+            <SkipForward size={18} />
+          </button>
+        </div>
 
-          <div className="flex items-center gap-2 w-full mt-2">
-            <span className="text-xs text-gray-500 w-10 text-right">
-              {formatTime(progress)}
-            </span>
-            <input
-              type="range"
-              min={0}
-              max={duration}
-              value={progress}
-              onChange={handleSeek}
-              className="w-full accent-pink-500"
-            />
-            <span className="text-xs text-gray-500 w-10">
-              {formatTime(duration)}
-            </span>
-          </div>
+        <div className="flex items-center gap-2 w-1/3">
+          <span className="text-xs text-gray-500 w-10 text-right">
+            {formatTime(progress)}
+          </span>
+          <input
+            type="range"
+            min={0}
+            max={duration}
+            value={progress}
+            onChange={handleSeek}
+            className="w-full accent-pink-500"
+          />
+          <span className="text-xs text-gray-500 w-10">
+            {formatTime(duration)}
+          </span>
         </div>
       </div>
     </div>

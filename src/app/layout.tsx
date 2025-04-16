@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import { PlayerProvider } from "@/context/PlayerContext";
 import PlayerContainer from "@/components/music/PlayerContainer";
+import NowPlayingView from "@/components/music/NowPlayingView";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -24,9 +25,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${font.className} antialiased`}>
         <PlayerProvider>
-          <Header />
-          {children}
-          <PlayerContainer />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1 relative">
+              <div className="w-full md:w-2/3 transition-all duration-300">
+                {children}
+              </div>
+              <NowPlayingView />
+            </main>
+            <PlayerContainer />
+          </div>
         </PlayerProvider>
       </body>
     </html>
