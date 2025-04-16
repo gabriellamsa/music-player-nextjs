@@ -3,9 +3,13 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
+import { usePathname } from "next/navigation";
 
 export default function ResponsiveNav() {
   const [isOpen, setIosOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <div className="flex items-center justify-between">
@@ -14,9 +18,30 @@ export default function ResponsiveNav() {
       </Link>
 
       <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600">
-        <Link href="#">Home</Link>
-        <Link href="#">Browse</Link>
-        <Link href="#">Library</Link>
+        <Link
+          href="/"
+          className={`hover:text-gray-900 transition-colors ${
+            isActive("/") ? "text-gray-900 font-semibold" : ""
+          }`}
+        >
+          Home
+        </Link>
+        <Link
+          href="/browse"
+          className={`hover:text-gray-900 transition-colors ${
+            isActive("/browse") ? "text-gray-900 font-semibold" : ""
+          }`}
+        >
+          Browse
+        </Link>
+        <Link
+          href="/library"
+          className={`hover:text-gray-900 transition-colors ${
+            isActive("/library") ? "text-gray-900 font-semibold" : ""
+          }`}
+        >
+          Library
+        </Link>
       </div>
 
       <button
