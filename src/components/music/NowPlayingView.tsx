@@ -2,15 +2,29 @@
 
 import { usePlayer } from "@/context/PlayerContext";
 import PlaylistToggle from "./PlaylistToggle";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function NowPlayingView() {
   const { currentTrack } = usePlayer();
+  const [isMinimized, setIsMinimized] = useState(false);
 
   if (!currentTrack) return null;
 
   return (
     <>
-      <div className="fixed right-0 top-16 h-[calc(100vh-8rem)] w-full md:w-1/3 bg-neutral-100 dark:bg-neutral-800 border-l border-neutral-200 dark:border-neutral-700 p-6 overflow-y-auto">
+      <div 
+        className={`fixed right-0 top-16 h-[calc(100vh-8rem)] w-full md:w-1/3 bg-neutral-100 dark:bg-neutral-800 border-l border-neutral-200 dark:border-neutral-700 p-6 overflow-y-auto transition-transform duration-300 ${
+          isMinimized ? 'translate-x-full' : 'translate-x-0'
+        }`}
+      >
+        <button
+          onClick={() => setIsMinimized(!isMinimized)}
+          className="absolute top-2 right-2 p-2 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+        >
+          {isMinimized ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
+        </button>
+        
         <div className="flex flex-col items-center gap-6">
           <img
             src={currentTrack.album.cover_big}
@@ -33,6 +47,16 @@ export default function NowPlayingView() {
           </div>
         </div>
       </div>
+
+      {isMinimized && (
+        <button
+          onClick={() => setIsMinimized(false)}
+          className="fixed right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors shadow-lg"
+        >
+          <ChevronLeft size={24} />
+        </button>
+      )}
+
       <PlaylistToggle />
     </>
   );
