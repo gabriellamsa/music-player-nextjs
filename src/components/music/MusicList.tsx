@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { searchTracks } from "@/lib/deezer-api";
 import MusicItem from "./MusicItem";
+import { motion } from "framer-motion";
 
 export default function MusicList() {
   const [tracks, setTracks] = useState<any[]>([]);
@@ -23,13 +24,31 @@ export default function MusicList() {
     fetchTracks();
   }, []);
 
-  if (loading) return <div className="p-4">Loading tracks...</div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 pb-24">
-      {tracks.map((track) => (
-        <MusicItem key={track.id} track={track} allTracks={tracks} />
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 pb-24"
+    >
+      {tracks.map((track, index) => (
+        <motion.div
+          key={track.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+        >
+          <MusicItem track={track} allTracks={tracks} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

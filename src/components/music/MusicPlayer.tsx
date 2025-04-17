@@ -91,7 +91,11 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-gradient-to-r from-neutral-900 to-black border-t border-neutral-800 p-4 shadow-2xl z-30">
+    <motion.div 
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      className="fixed bottom-0 w-full bg-gradient-to-r from-neutral-900/95 to-black/95 backdrop-blur-md border-t border-neutral-800/50 p-4 shadow-2xl z-30"
+    >
       <audio
         ref={audioRef}
         src={track.preview}
@@ -99,32 +103,36 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
         onLoadedMetadata={handleLoaded}
       />
 
-      <div className="flex items-center justify-between gap-6 max-w-7xl mx-auto w-full">
-        <div className="flex items-center gap-4 flex-1">
-          <img
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-4 w-full md:w-auto md:flex-1">
+          <motion.img
+            whileHover={{ scale: 1.05 }}
             src={track.album.cover_small}
             alt={track.title}
             className="w-12 h-12 rounded-md object-cover shadow-lg"
           />
-          <div className="truncate">
-            <p className="font-semibold text-white truncate">{track.title}</p>
-            <p className="text-sm text-neutral-400 truncate">
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold text-white truncate text-sm md:text-base">{track.title}</p>
+            <p className="text-xs md:text-sm text-neutral-400 truncate">
               {track.artist.name}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-2 flex-1">
-          <div className="flex items-center gap-6">
-            <button 
+        <div className="flex flex-col items-center gap-2 w-full md:w-auto md:flex-1">
+          <div className="flex items-center gap-4 md:gap-6">
+            <motion.button 
               onClick={playPrevious} 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
             >
               <SkipBack size={20} className="text-neutral-400" />
-            </button>
+            </motion.button>
 
             <motion.button
               onClick={togglePlay}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               animate={
                 isPlaying
@@ -134,17 +142,19 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
                     }
                   : {}
               }
-              className="p-3 rounded-full bg-white hover:bg-neutral-200 transition-colors"
+              className="p-3 rounded-full bg-white hover:bg-neutral-200 transition-colors shadow-lg"
             >
               {isPlaying ? <Pause size={24} className="text-black" /> : <Play size={24} className="text-black" />}
             </motion.button>
 
-            <button 
+            <motion.button 
               onClick={playNext} 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
             >
               <SkipForward size={20} className="text-neutral-400" />
-            </button>
+            </motion.button>
           </div>
 
           <div className="flex items-center gap-2 w-full max-w-md">
@@ -157,7 +167,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
               max={duration}
               value={progress}
               onChange={handleSeek}
-              className="w-full h-1 bg-neutral-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+              className="w-full h-1 bg-neutral-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:transition-transform"
             />
             <span className="text-xs text-neutral-400 w-10">
               {formatTime(duration)}
@@ -165,7 +175,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 flex-1 justify-end">
+        <div className="hidden md:flex items-center gap-2 flex-1 justify-end">
           <Volume2 size={20} className="text-neutral-400" />
           <input
             type="range"
@@ -174,10 +184,10 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
             step={0.01}
             value={volume}
             onChange={handleVolumeChange}
-            className="w-24 h-1 bg-neutral-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+            className="w-24 h-1 bg-neutral-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:transition-transform"
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
