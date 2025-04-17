@@ -91,7 +91,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className="fixed bottom-0 w-full bg-gradient-to-r from-neutral-900/95 to-black/95 backdrop-blur-md border-t border-neutral-800/50 p-4 shadow-2xl z-30"
@@ -112,7 +112,9 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
             className="w-12 h-12 rounded-md object-cover shadow-lg"
           />
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-white truncate text-sm md:text-base">{track.title}</p>
+            <p className="font-semibold text-white truncate text-sm md:text-base">
+              {track.title}
+            </p>
             <p className="text-xs md:text-sm text-neutral-400 truncate">
               {track.artist.name}
             </p>
@@ -121,8 +123,8 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
 
         <div className="flex flex-col items-center gap-2 w-full md:w-auto md:flex-1">
           <div className="flex items-center gap-4 md:gap-6">
-            <motion.button 
-              onClick={playPrevious} 
+            <motion.button
+              onClick={playPrevious}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
@@ -144,11 +146,15 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
               }
               className="p-3 rounded-full bg-white hover:bg-neutral-200 transition-colors shadow-lg"
             >
-              {isPlaying ? <Pause size={24} className="text-black" /> : <Play size={24} className="text-black" />}
+              {isPlaying ? (
+                <Pause size={24} className="text-black" />
+              ) : (
+                <Play size={24} className="text-black" />
+              )}
             </motion.button>
 
-            <motion.button 
-              onClick={playNext} 
+            <motion.button
+              onClick={playNext}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="p-2 hover:bg-neutral-800 rounded-full transition-colors"

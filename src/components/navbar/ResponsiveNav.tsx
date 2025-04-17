@@ -1,5 +1,5 @@
 "use client";
-import { Menu, Music } from "lucide-react";
+import { Menu, Music, Search } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
@@ -29,6 +29,14 @@ export default function ResponsiveNav() {
           }`}
         >
           Home
+        </Link>
+        <Link
+          href="/search"
+          className={`text-neutral-400 hover:text-white transition-colors ${
+            isActive("/search") ? "text-white font-semibold" : ""
+          }`}
+        >
+          Search
         </Link>
         <Link
           href="/browse"

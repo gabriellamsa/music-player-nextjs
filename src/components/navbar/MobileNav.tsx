@@ -25,6 +25,14 @@ export default function MobileNav({ isOpen }: Props) {
         Home
       </Link>
       <Link
+        href="/search"
+        className={`text-neutral-400 hover:text-white transition-colors ${
+          isActive("/search") ? "text-white font-semibold" : ""
+        }`}
+      >
+        Search
+      </Link>
+      <Link
         href="/browse"
         className={`text-neutral-400 hover:text-white transition-colors ${
           isActive("/browse") ? "text-white font-semibold" : ""

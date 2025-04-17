@@ -1,9 +1,15 @@
-export async function searchTracks(query: string) {
-  const res = await fetch(`/api/deezer?q=${encodeURIComponent(query)}`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch from local Deezer API route");
-  }
+export async function searchTracks(query: string): Promise<any[]> {
+  try {
+    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+    
+    if (!response.ok) {
+      throw new Error("Failed to fetch from local API route");
+    }
 
-  const data = await res.json();
-  return data;
+    const data = await response.json();
+    return data.data || [];
+  } catch (error) {
+    console.error("Error searching tracks:", error);
+    return [];
+  }
 }
