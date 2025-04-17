@@ -1,6 +1,6 @@
 "use client";
 
-import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
+import { Pause, Play, SkipBack, SkipForward, Volume2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { usePlayer } from "@/context/PlayerContext";
@@ -14,6 +14,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(30);
+  const [volume, setVolume] = useState(1);
   const { playNext, playPrevious } = usePlayer();
 
   useEffect(() => {
@@ -73,6 +74,14 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
     }
   };
 
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = Number(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60)
@@ -82,7 +91,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
   };
 
   return (
-    <div className="fixed bottom-0 w-full bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-700 p-2 shadow-xl z-30">
+    <div className="fixed bottom-0 w-full bg-gradient-to-r from-neutral-900 to-black border-t border-neutral-800 p-4 shadow-2xl z-30">
       <audio
         ref={audioRef}
         src={track.preview}
@@ -90,62 +99,83 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
         onLoadedMetadata={handleLoaded}
       />
 
-      <div className="flex items-center justify-between gap-4 max-w-5xl mx-auto w-full">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-6 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-4 flex-1">
           <img
             src={track.album.cover_small}
             alt={track.title}
-            className="w-10 h-10 rounded-md object-cover"
+            className="w-12 h-12 rounded-md object-cover shadow-lg"
           />
           <div className="truncate">
-            <p className="font-semibold text-sm truncate">{track.title}</p>
-            <p className="text-xs text-gray-500 truncate">
+            <p className="font-semibold text-white truncate">{track.title}</p>
+            <p className="text-sm text-neutral-400 truncate">
               {track.artist.name}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <button onClick={playPrevious} className="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full">
-            <SkipBack size={18} />
-          </button>
+        <div className="flex flex-col items-center gap-2 flex-1">
+          <div className="flex items-center gap-6">
+            <button 
+              onClick={playPrevious} 
+              className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
+            >
+              <SkipBack size={20} className="text-neutral-400" />
+            </button>
 
-          <motion.button
-            onClick={togglePlay}
-            whileTap={{ scale: 0.9 }}
-            animate={
-              isPlaying
-                ? {
-                    scale: [1, 1.1, 1],
-                    transition: { duration: 1, repeat: Infinity },
-                  }
-                : {}
-            }
-            className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800"
-          >
-            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-          </motion.button>
+            <motion.button
+              onClick={togglePlay}
+              whileTap={{ scale: 0.9 }}
+              animate={
+                isPlaying
+                  ? {
+                      scale: [1, 1.1, 1],
+                      transition: { duration: 1, repeat: Infinity },
+                    }
+                  : {}
+              }
+              className="p-3 rounded-full bg-white hover:bg-neutral-200 transition-colors"
+            >
+              {isPlaying ? <Pause size={24} className="text-black" /> : <Play size={24} className="text-black" />}
+            </motion.button>
 
-          <button onClick={playNext} className="p-1 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-full">
-            <SkipForward size={18} />
-          </button>
+            <button 
+              onClick={playNext} 
+              className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
+            >
+              <SkipForward size={20} className="text-neutral-400" />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 w-full max-w-md">
+            <span className="text-xs text-neutral-400 w-10 text-right">
+              {formatTime(progress)}
+            </span>
+            <input
+              type="range"
+              min={0}
+              max={duration}
+              value={progress}
+              onChange={handleSeek}
+              className="w-full h-1 bg-neutral-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+            />
+            <span className="text-xs text-neutral-400 w-10">
+              {formatTime(duration)}
+            </span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 w-1/3">
-          <span className="text-xs text-gray-500 w-10 text-right">
-            {formatTime(progress)}
-          </span>
+        <div className="flex items-center gap-2 flex-1 justify-end">
+          <Volume2 size={20} className="text-neutral-400" />
           <input
             type="range"
             min={0}
-            max={duration}
-            value={progress}
-            onChange={handleSeek}
-            className="w-full accent-pink-500"
+            max={1}
+            step={0.01}
+            value={volume}
+            onChange={handleVolumeChange}
+            className="w-24 h-1 bg-neutral-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
           />
-          <span className="text-xs text-gray-500 w-10">
-            {formatTime(duration)}
-          </span>
         </div>
       </div>
     </div>
