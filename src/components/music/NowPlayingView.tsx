@@ -51,9 +51,9 @@ export default function NowPlayingView() {
       {isMinimized && (
         <button
           onClick={() => setIsMinimized(false)}
-          className="fixed right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors shadow-lg"
+          className="fixed right-0 top-1/2 -translate-y-1/2 p-2.5 rounded-l-lg bg-neutral-100/80 dark:bg-neutral-800/80 backdrop-blur-sm border border-r-0 border-neutral-200/50 dark:border-neutral-700/50 hover:bg-neutral-200/90 dark:hover:bg-neutral-700/90 transition-all duration-200 shadow-sm hover:shadow-md"
         >
-          <ChevronLeft size={24} />
+          <ChevronLeft size={20} className="text-neutral-600 dark:text-neutral-400" />
         </button>
       )}
 
