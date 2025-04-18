@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Music Player
 
-## Getting Started
+A modern and responsive music player built with Next.js, React, and Tailwind CSS.
 
-First, run the development server:
+## 🎵 Features
+
+- **Intuitive Navigation**: Modern and easy-to-use interface
+- **Music Library**: Organize and access your music collection
+- **Advanced Search**: Quickly find your favorite songs
+- **Audio Playback**: Complete playback controls
+- **Responsive Design**: Works perfectly on mobile and desktop devices
+
+## 🛠️ Technologies Used
+
+- **Next.js 15**: React framework for server-side rendering
+- **React 19**: JavaScript library for building user interfaces
+- **Tailwind CSS**: Utility-first CSS framework
+- **Framer Motion**: Library for smooth animations
+- **TypeScript**: Adds static typing to JavaScript
+- **Lucide React**: Modern and elegant icons
+
+## 🚀 How to Run
+
+1. Clone the repository:
+
+```bash
+git clone [REPOSITORY_URL]
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open `http://localhost:3000` in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev`: Starts the development server
+- `npm run build`: Creates an optimized production build
+- `npm run start`: Starts the production server
+- `npm run lint`: Runs code linting
 
-## Learn More
+## 🎨 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/           # Application pages and routes
+├── components/    # Reusable components
+├── context/       # React contexts
+└── lib/          # Utilities and configurations
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License. See the LICENSE file for more details.
