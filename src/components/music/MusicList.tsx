@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { searchTracks } from "@/lib/deezer-api";
 import MusicItem from "./MusicItem";
 import { motion } from "framer-motion";
+import { DeezerTrack } from "@/types/deezer";
 
 export default function MusicList() {
-  const [tracks, setTracks] = useState<any[]>([]);
+  const [tracks, setTracks] = useState<DeezerTrack[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

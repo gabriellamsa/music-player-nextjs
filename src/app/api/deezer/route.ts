@@ -20,7 +20,7 @@ export async function GET(request: Request) {
         "Content-Type": "application/json",
       },
     });
-  } catch (err) {
+  } catch {
     return new Response(JSON.stringify({ error: "Failed to fetch data" }), {
       status: 500,
     });

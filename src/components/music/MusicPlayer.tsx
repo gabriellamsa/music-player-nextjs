@@ -1,12 +1,20 @@
 "use client";
 
-import { Pause, Play, SkipBack, SkipForward, Volume2, Mic2 } from "lucide-react";
+import {
+  Pause,
+  Play,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  Mic2,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { usePlayer } from "@/context/PlayerContext";
+import { DeezerTrack } from "@/types/deezer";
 
 interface MusicPlayerProps {
-  track: any;
+  track: DeezerTrack;
 }
 
 export default function MusicPlayer({ track }: MusicPlayerProps) {
@@ -170,7 +178,12 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
                 isLyricsVisible ? "bg-green-500/20" : "hover:bg-neutral-800"
               }`}
             >
-              <Mic2 size={20} className={isLyricsVisible ? "text-green-500" : "text-neutral-400"} />
+              <Mic2
+                size={20}
+                className={
+                  isLyricsVisible ? "text-green-500" : "text-neutral-400"
+                }
+              />
             </motion.button>
           </div>
 

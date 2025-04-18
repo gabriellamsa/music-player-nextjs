@@ -5,10 +5,11 @@ import { searchTracks } from "@/lib/deezer-api";
 import MusicItem from "@/components/music/MusicItem";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
+import { DeezerTrack } from "@/types/deezer";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
-  const [tracks, setTracks] = useState<any[]>([]);
+  const [tracks, setTracks] = useState<DeezerTrack[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleSearch = async (e: React.FormEvent) => {
