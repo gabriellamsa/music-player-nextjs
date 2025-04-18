@@ -28,7 +28,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Header />
             <main className="flex-1 relative">
-              <div className="w-full md:w-2/3 transition-all duration-300">
+              <div className="max-w-7xl mx-auto w-full transition-all duration-300">
                 {children}
               </div>
               <NowPlayingView />

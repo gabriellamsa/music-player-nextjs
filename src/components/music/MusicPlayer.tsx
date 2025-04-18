@@ -1,6 +1,6 @@
 "use client";
 
-import { Pause, Play, SkipBack, SkipForward, Volume2 } from "lucide-react";
+import { Pause, Play, SkipBack, SkipForward, Volume2, Mic2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { usePlayer } from "@/context/PlayerContext";
@@ -15,7 +15,7 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(30);
   const [volume, setVolume] = useState(1);
-  const { playNext, playPrevious } = usePlayer();
+  const { playNext, playPrevious, isLyricsVisible, toggleLyrics } = usePlayer();
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -160,6 +160,17 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
               className="p-2 hover:bg-neutral-800 rounded-full transition-colors"
             >
               <SkipForward size={20} className="text-neutral-400" />
+            </motion.button>
+
+            <motion.button
+              onClick={toggleLyrics}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className={`p-2 rounded-full transition-colors ${
+                isLyricsVisible ? "bg-green-500/20" : "hover:bg-neutral-800"
+              }`}
+            >
+              <Mic2 size={20} className={isLyricsVisible ? "text-green-500" : "text-neutral-400"} />
             </motion.button>
           </div>
 
