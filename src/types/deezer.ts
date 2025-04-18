@@ -12,6 +12,9 @@ export interface DeezerTrack {
     id: number;
     title: string;
     cover: string;
+    cover_small: string;
+    cover_medium: string;
+    cover_big: string;
   };
 }
 

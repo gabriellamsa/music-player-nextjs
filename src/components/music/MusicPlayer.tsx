@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { usePlayer } from "@/context/PlayerContext";
 import { DeezerTrack } from "@/types/deezer";
+import Image from "next/image";
 
 interface MusicPlayerProps {
   track: DeezerTrack;
@@ -113,12 +114,15 @@ export default function MusicPlayer({ track }: MusicPlayerProps) {
 
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 max-w-7xl mx-auto w-full">
         <div className="flex items-center gap-4 w-full md:w-auto md:flex-1">
-          <motion.img
-            whileHover={{ scale: 1.05 }}
-            src={track.album.cover_small}
-            alt={track.title}
-            className="w-12 h-12 rounded-md object-cover shadow-lg"
-          />
+          <motion.div className="relative w-12 h-12">
+            <Image
+              src={track.album.cover}
+              alt={track.title}
+              width={48}
+              height={48}
+              className="rounded-md object-cover shadow-lg"
+            />
+          </motion.div>
           <div className="flex-1 min-w-0">
             <p className="font-semibold text-white truncate text-sm md:text-base">
               {track.title}
