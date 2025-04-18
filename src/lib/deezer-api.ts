@@ -1,4 +1,6 @@
-export async function searchTracks(query: string): Promise<any[]> {
+import { DeezerTrack } from "@/types/deezer";
+
+export async function searchTracks(query: string): Promise<DeezerTrack[]> {
   try {
     const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
     

@@ -1,16 +1,17 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
+import { DeezerTrack } from "@/types/deezer";
 
 interface PlayerContextType {
-  currentTrack: any | null;
-  playlist: any[];
-  library: any[];
-  setCurrentTrack: (track: any | null) => void;
-  playTrack: (track: any, playlist?: any[]) => void;
+  currentTrack: DeezerTrack | null;
+  playlist: DeezerTrack[];
+  library: DeezerTrack[];
+  setCurrentTrack: (track: DeezerTrack | null) => void;
+  playTrack: (track: DeezerTrack, playlist?: DeezerTrack[]) => void;
   playNext: () => void;
   playPrevious: () => void;
-  addToLibrary: (track: any) => void;
+  addToLibrary: (track: DeezerTrack) => void;
   removeFromLibrary: (trackId: number) => void;
   isInLibrary: (trackId: number) => boolean;
   isLyricsVisible: boolean;
@@ -20,12 +21,12 @@ interface PlayerContextType {
 const PlayerContext = createContext<PlayerContextType | undefined>(undefined);
 
 export function PlayerProvider({ children }: { children: ReactNode }) {
-  const [currentTrack, setCurrentTrack] = useState<any | null>(null);
-  const [playlist, setPlaylist] = useState<any[]>([]);
-  const [library, setLibrary] = useState<any[]>([]);
+  const [currentTrack, setCurrentTrack] = useState<DeezerTrack | null>(null);
+  const [playlist, setPlaylist] = useState<DeezerTrack[]>([]);
+  const [library, setLibrary] = useState<DeezerTrack[]>([]);
   const [isLyricsVisible, setIsLyricsVisible] = useState(false);
 
-  const playTrack = (track: any, list?: any[]) => {
+  const playTrack = (track: DeezerTrack, list?: DeezerTrack[]) => {
     setCurrentTrack(track);
     if (list) setPlaylist(list);
   };
@@ -44,7 +45,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     if (previousTrack) setCurrentTrack(previousTrack);
   };
 
-  const addToLibrary = (track: any) => {
+  const addToLibrary = (track: DeezerTrack) => {
     if (!library.some((t) => t.id === track.id)) {
       setLibrary([...library, track]);
     }

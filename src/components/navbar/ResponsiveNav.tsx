@@ -1,5 +1,5 @@
 "use client";
-import { Menu, Music, Search } from "lucide-react";
+import { Menu, Music } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import MobileNav from "./MobileNav";

@@ -3,10 +3,12 @@
 import { Heart, Play } from "lucide-react";
 import { usePlayer } from "@/context/PlayerContext";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { DeezerTrack } from "@/types/deezer";
 
 interface MusicItemProps {
-  track: any;
-  allTracks: any[];
+  track: DeezerTrack;
+  allTracks: DeezerTrack[];
 }
 
 export default function MusicItem({ track, allTracks }: MusicItemProps) {
@@ -30,10 +32,12 @@ export default function MusicItem({ track, allTracks }: MusicItemProps) {
       className="group cursor-pointer bg-neutral-900/50 backdrop-blur-sm rounded-lg p-4 flex items-center gap-4 hover:bg-neutral-800/50 transition-all duration-200 border border-neutral-800/50 hover:border-neutral-700/50"
     >
       <div className="relative">
-        <img
-          src={track.album.cover_medium}
+        <Image
+          src={track.album.cover}
           alt={track.title}
-          className="w-16 h-16 rounded-lg object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-200"
+          width={64}
+          height={64}
+          className="rounded-lg object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-200"
         />
         <motion.div
           initial={{ opacity: 0 }}

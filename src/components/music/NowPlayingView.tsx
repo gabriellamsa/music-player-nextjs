@@ -3,6 +3,7 @@
 import { usePlayer } from "@/context/PlayerContext";
 import PlaylistToggle from "./PlaylistToggle";
 import { Music2, Mic2 } from "lucide-react";
+import Image from "next/image";
 
 export default function NowPlayingView() {
   const { currentTrack, isLyricsVisible } = usePlayer();
@@ -21,10 +22,12 @@ export default function NowPlayingView() {
         <div className="h-full overflow-y-auto">
           <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 p-4 sm:p-6">
             <div className="relative group">
-              <img
-                src={currentTrack.album.cover_big}
+              <Image
+                src={currentTrack.album.cover}
                 alt={currentTrack.title}
-                className="w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-xl object-cover shadow-2xl group-hover:scale-105 transition-transform duration-300"
+                width={256}
+                height={256}
+                className="rounded-xl object-cover shadow-2xl group-hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center">
                 <Music2 size={40} className="text-white" />
