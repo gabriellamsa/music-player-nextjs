@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { DeezerSearchResponse } from "@/types/deezer";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
       throw new Error("Failed to fetch from Deezer API");
     }
 
-    const data = await response.json();
+    const data: DeezerSearchResponse = await response.json();
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error searching tracks:", error);
