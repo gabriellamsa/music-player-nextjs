@@ -6,10 +6,14 @@ import MobileNav from "./MobileNav";
 import { usePathname } from "next/navigation";
 
 export default function ResponsiveNav() {
-  const [isOpen, setIosOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="flex items-center justify-between h-16">
@@ -57,14 +61,14 @@ export default function ResponsiveNav() {
       </div>
 
       <button
+        onClick={toggleMenu}
         className="md:hidden p-2 text-neutral-400 hover:text-white transition-colors"
-        onClick={() => setIosOpen(!isOpen)}
-        aria-label="Toggle Menu"
+        aria-label="Toggle menu"
       >
-        <Menu className="h-6 w-6" />
+        <Menu size={24} />
       </button>
 
-      <MobileNav isOpen={isOpen} />
+      <MobileNav isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }
